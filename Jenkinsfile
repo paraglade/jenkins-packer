@@ -6,7 +6,7 @@ node {
 
   stage "Stage Parallel"
   def branches = [:]
-  for (int i = 0; i < numHelloMessages.toInteger(); i++) {
+  for (int i = 0; i < 4; i++) {
     def index = i
     branches["split${i}"] = {
       stage "Stage parallel- #"+index
