@@ -18,4 +18,6 @@ node {
     }
   }
   parallel branches
+
+  sh 'ls'
 }
