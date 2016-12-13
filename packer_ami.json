@@ -1,0 +1,59 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "us-west-2",
+      "source_ami": "ami-73208813",
+      "instance_type": "m3.medium",
+      "ssh_username": "ubuntu",
+      "ami_name": "packer-api {{timestamp}}",
+      "tags": {
+        "Role": "api",
+        "Environment": "photos-delta"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 30",
+        "sudo apt-get update",
+        "sudo apt-get upgrade -y",
+        "sudo apt-get install -y redis-server nginx php"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "config/nginx/api.conf",
+      "destination": "/tmp/api.conf"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo rm /etc/nginx/sites-enabled/default",
+        "sudo mv /tmp/api.conf /etc/nginx/sites-available/api.conf",
+        "sudo ln -s /etc/nginx/sites-available/api.conf /etc/nginx/sites-enabled/api.conf"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "/Users/lmonson/ThisLife/API",
+      "destination": "/tmp/photos"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo mkdir -p /srv/photos",
+        "sudo mv /tmp/photos /srv/photos"
+      ]
+    }
+  ]
+}
+
