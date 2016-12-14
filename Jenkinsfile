@@ -10,13 +10,14 @@ stage('validate') {
 }
 stage('build') {
   node {
-    packer 'build -var-file=us-west-1.json packer_ami.json | tee packer_ami.log'
+//    packer 'build -var-file=us-west-1.json packer_ami.json | tee packer_ami.log'
   }
 }
 
 stage('tag') {
   node {
-
+    echo ami_id
+    echo distro
   }
 }
 
@@ -33,4 +34,12 @@ def packer(args) {
 def check_deps(args) {
   echo "checking ${args}"
   sh "which ${args}"
+}
+
+def ami_id(){
+  sh "awk '/AMI: ami-/ { print \$4 }' packer_ami.log"
+}
+
+def distro() {
+  sh "awk '/@LSB_DISTRIBUTION/ { print \$4 }' packer_ami.log"
 }
