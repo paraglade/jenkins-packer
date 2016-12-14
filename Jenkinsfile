@@ -3,6 +3,7 @@ stage('build') {
     checkout scm
     sh 'pwd'
     sh 'ls -la'
+    sh 'env'
     packer 'version'
   }
 }
