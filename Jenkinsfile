@@ -18,6 +18,7 @@ stage('tag') {
   node {
     echo ami_id()
     echo distro()
+    aws_tag 'ami_id() --tags Key=distro,Value=distro()'
   }
 }
 
@@ -42,4 +43,8 @@ def ami_id(){
 
 def distro() {
   sh "awk '/@LSB_DISTRIBUTION/ { print \$4 }' packer_ami.log"
+}
+
+def aws_tag(arg) {
+  sh "aws ec2 create-tags --resources ${args}"
 }
