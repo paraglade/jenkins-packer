@@ -26,11 +26,10 @@
   "provisioners": [
     {
       "type": "shell",
-      "inline": [
-        "sleep 10",
-        "sudo apt-get update",
-        "sudo apt-get upgrade -y",
-        "sudo apt-get install -y redis-server nginx php"
+      "scripts": [
+          "scripts/provision.sh",
+          "scripts/audit.sh",
+          "scripts/clean.sh"
       ]
     }
   ]
