@@ -8,6 +8,7 @@ stage('validate') {
 stage('build') {
   node {
     sh 'env'
+    sh 'aws'
   }
 }
 
