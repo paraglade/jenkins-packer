@@ -16,8 +16,8 @@ stage('build') {
 
 stage('tag') {
   node {
-    echo ami_id
-    echo distro
+    echo ami_id()
+    echo distro()
   }
 }
 
