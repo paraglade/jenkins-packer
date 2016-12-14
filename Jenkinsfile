@@ -16,9 +16,9 @@ stage('build') {
 
 stage('tag') {
   node {
-    echo ami_id()
-    echo distro()
-    aws_tag 'ami_id() --tags Key=distro,Value=distro()'
+    ami_id = ami_id()
+    distro = distro()
+    aws_tag "${ami_id} --tags Key=distro,Value=${distro}"
   }
 }
 
