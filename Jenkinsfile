@@ -3,7 +3,7 @@ stage('build') {
     checkout scm
     sh 'pwd'
     sh 'ls -la'
-    packer 'validate'
+    packer 'version'
   }
 }
 
