@@ -16,8 +16,8 @@ stage('build') {
 
 stage('tag') {
   node {
-    ami_id = ami_id()
-    distro = distro()
+    ami_id = sh "awk '/AMI: ami-/ { print \$4 }' packer_ami.log"
+    distro = sh "awk '/@LSB_DISTRIBUTION/ { print \$4 }' packer_ami.log"
     aws_tag "${ami_id} --tags Key=distro,Value=${distro}"
   }
 }
