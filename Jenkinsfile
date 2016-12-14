@@ -53,6 +53,6 @@ def codename() {
   sh "awk '/@LSB_CODENAME/ { print \$4 }' packer_ami.log"
 }
 
-def aws_tag(arg) {
+def aws_tag(args) {
   sh "aws ec2 create-tags --resources ${args}"
 }
