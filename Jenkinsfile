@@ -1,6 +1,6 @@
 stage('validate') {
   node {
-    check_deps aws
+    check_deps 'aws'
     checkout scm
     packer 'version'
     packer 'validate -var-file=us-west-1.json packer_ami.json'
