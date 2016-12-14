@@ -1,15 +1,28 @@
 stage('validate') {
   node {
+    sh 'env'
     check_deps 'aws'
     checkout scm
     packer 'version'
     packer 'validate -var-file=us-west-1.json packer_ami.json'
+
   }
 }
 stage('build') {
   node {
-    sh 'env'
-    sh 'aws'
+    packer 'build -var-file=us-west-1.json packer_ami.json | tee packer_ami.log'
+  }
+}
+
+stage('tag') {
+  node {
+
+  }
+}
+
+stage('test') {
+  node {
+
   }
 }
 
