@@ -19,5 +19,5 @@ def packer(args) {
 
 def check_deps(args) {
   echo "checking ${args}"
-  sh 'which ${args}'
+  sh "which ${args}"
 }
