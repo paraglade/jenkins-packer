@@ -26,6 +26,8 @@
   "provisioners": [
     {
       "type": "shell",
+      "pause_before": "5s",
+      "execute_command": "sudo -S sh '{{.Path}}'",
       "scripts": [
           "scripts/provision.sh",
           "scripts/audit.sh",
