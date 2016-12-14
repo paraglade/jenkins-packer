@@ -1,10 +1,13 @@
-stage('build') {
+stage('validate') {
   node {
     checkout scm
-    sh 'pwd'
-    sh 'ls -la'
-    sh 'env'
     packer 'version'
+    packer 'validate -var-file=us-west-1.json packer_ami.json'
+  }
+}
+stage('build') {
+  node {
+    sh 'env'
   }
 }
 
