@@ -34,6 +34,7 @@ stage('tag') {
         'Key=build_job_name,Value=${env.JOB_NAME}' \
         'Key=build_repo,Value=${git_repo()}' \
         'Key=build_commit,Value=${git_commit()}' \
+        'Key=build_time=$sh('date +\"%s\"')' \
       ",
       region: 'us-west-1'
     )
