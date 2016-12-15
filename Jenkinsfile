@@ -34,13 +34,13 @@ stage('tag') {
         'Key=build_number,Value=${env.BUILD_NUMBER}' \
         'Key=build_job_name,Value=${env.JOB_NAME}' \
         'Key=build_repo,Value=${git_repo()}' \
+        'Key=build_commit,Value=${git_commit()}' \
       ",
       region: 'us-west-1'
     )
   }
 }
 
-  //      'Key=build_commit,Value=${git_commit()}' \
 stage('test') {
   node {
 
@@ -99,8 +99,8 @@ def git_repo() {
 }
 
 def git_commit() {
-  sh (
-    script: "git rev-parse HEAD",
-    returnStdout: true
-  ).trim()
+//  sh (
+//    script: "git rev-parse HEAD",
+//    returnStdout: true
+//  ).trim()
 }
