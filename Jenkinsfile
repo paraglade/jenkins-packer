@@ -22,7 +22,7 @@ stage('tag') {
     )
     aws_tag (
       resources: ami_id(),
-      tags: "
+      tags: " \
         Key=distro,Value=${distro()}
         Key=release,Value=${release()}
       ",
