@@ -19,7 +19,8 @@
       "ssh_username": "ubuntu",
       "tags": {
         "Role": "api",
-        "Environment": "photos-delta"
+        "Environment": "photos-delta",
+        "state": "initialized"
       }
     }
   ],
