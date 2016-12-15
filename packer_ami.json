@@ -5,7 +5,7 @@
     "region": "",
     "source_ami": "",
     "instance_type": "m3.medium",
-    "ami_name": "api.photos {{isotime | clean_ami_name}}"
+    "ami_name": "api.photos "
   },
   "builders": [
     {
@@ -15,7 +15,7 @@
       "region": "{{user `region`}}",
       "source_ami": "{{user `source_ami`}}",
       "instance_type": "{{user `instance_type`}}",
-      "ami_name": "{{user `ami_name`}}",
+      "ami_name": "{{user `ami_name`}} {{isotime | clean_ami_name}}",
       "ssh_username": "ubuntu",
       "tags": {
         "Role": "api",
