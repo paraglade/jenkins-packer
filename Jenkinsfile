@@ -20,6 +20,10 @@ stage('tag') {
       script: "echo ami_id id: ${ami_id()}",
       returnStdout: true
     )
+    aws_tag (
+      resources: ami_id(),
+      tags: "Key=distro,Value=${distro()}"
+    )
   }
 }
 
@@ -66,6 +70,9 @@ def codename() {
   ).trim()
 }
 
-def aws_tag(args) {
-  sh "aws ec2 create-tags --resources ${args}"
+def aws_tag(Map args) {
+  sh (
+    script: "aws ec2 create-tags --resources ${args.resources} --tags ${args.tags}",
+    returnStdout: true
+  )
 }
