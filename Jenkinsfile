@@ -43,7 +43,7 @@ stage('tag') {
 
 stage('test') {
   node {
-
+    figlet(message: 'testing')
   }
 }
 
