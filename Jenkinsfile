@@ -28,6 +28,9 @@ stage('tag') {
         Key=release,Value=${release()} \
         Key=release_name,Value=${codename()} \
         Key=build_server,Value=${env.HOSTNAME} \
+        Key=build_node,Value=${env.NODE_NAME} \
+        Key=build_id,Value=${env.BUILD_ID} \
+        Key=build_id,Value=${env.BUILD_ID} \
       ",
       region: 'us-west-1'
     )
