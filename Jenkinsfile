@@ -89,14 +89,14 @@ def aws_tag(Map args) {
   )
 }
 
-def git_repo(args) {
+def git_repo() {
   sh (
     script: "git config remote.origin.url",
     returnStdout: true
   ).trim()
 }
 
-def git_commit(arga){
+def git_commit(){
   sh (
     script: "git rev-parse HEAD",
     returnStdout: true
