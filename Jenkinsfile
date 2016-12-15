@@ -17,10 +17,6 @@ stage('build') {
 
 stage('tag') {
   node {
-    sh (
-      script: "echo ami_id id: ${ami_id()}",
-      returnStdout: true
-    )
     aws_tag (
       resources: ami_id(),
       tags: "\
@@ -99,8 +95,8 @@ def git_repo() {
 }
 
 def git_commit() {
-//  sh (
-//    script: "git rev-parse HEAD",
-//    returnStdout: true
-//  ).trim()
+  sh (
+    script: "git rev-parse HEAD",
+    returnStdout: true
+  ).trim()
 }
