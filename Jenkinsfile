@@ -10,7 +10,7 @@ stage('validate') {
 }
 stage('build') {
   node {
-    packer 'build -color=false -var-file=us-west-1.json packer_ami.json | tee packer_ami.log'
+  //  packer 'build -color=false -var-file=us-west-1.json packer_ami.json | tee packer_ami.log'
   }
 }
 
@@ -45,28 +45,28 @@ def check_deps(args) {
 
 def ami_id(){
   sh (
-    script: "awk '/AMI: ami-/ { printf \"%s-\", \$4 }' packer_ami.log",
+    script: "awk '/AMI: ami-/ { print \$3 }' packer_ami.log",
     returnStdout: true
   ).trim()
 }
 
 def distro() {
   sh (
-    script: "awk '/@LSB_DISTRIBUTION/ { print \$4 }' packer_ami.log",
+    script: "awk '/@LSB_DISTRIBUTION/ { print \$3 }' packer_ami.log",
     returnStdout: true
   ).trim()
 }
 
 def release() {
   sh (
-    script: "awk '/@LSB_RELEASE/ { print \$4 }' packer_ami.log",
+    script: "awk '/@LSB_RELEASE/ { print \$3 }' packer_ami.log",
     returnStdout: true
   ).trim()
 }
 
 def codename() {
   sh (
-    script: "awk '/@LSB_CODENAME/ { print \$4 }' packer_ami.log",
+    script: "awk '/@LSB_CODENAME/ { print \$3 }' packer_ami.log",
     returnStdout: true
   ).trim()
 }
