@@ -23,8 +23,8 @@ stage('tag') {
     aws_tag (
       resources: ami_id(),
       tags: " \
-        Key=distro,Value=${distro()}
-        Key=release,Value=${release()}
+        Key=distro,Value=${distro()} \
+        Key=release,Value=${release()} \
       ",
       region: 'us-west-1'
     )
