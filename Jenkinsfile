@@ -22,17 +22,17 @@ stage('tag') {
     )
     aws_tag (
       resources: ami_id(),
-      tags: " \
-        Key=state,Value=initialized \
-        Key=distro,Value=${distro()} \
-        Key=release,Value=${release()} \
-        Key=release_name,Value=${codename()} \
-        Key=build_server,Value=${env.HOSTNAME} \
-        Key=build_node,Value=${env.NODE_NAME} \
-        Key=build_number,Value=${env.BUILD_NUMBER} \
-        Key=build_job_name,Value=${env.JOB_NAME} \
-        Key=build_repo,Value=${git_repo()} \
-        Key=build_commit,Value=${git_commit()} \
+      tags: "\
+        'Key=state,Value=initializedi' \
+        'Key=distro,Value=${distro()}' \
+        'Key=release,Value=${release()}' \
+        'Key=release_name,Value=${codename()}' \
+        'Key=build_server,Value=${env.HOSTNAME}' \
+        'Key=build_node,Value=${env.NODE_NAME}' \
+        'Key=build_number,Value=${env.BUILD_NUMBER}' \
+        'Key=build_job_name,Value=${env.JOB_NAME}' \
+        'Key=build_repo,Value=${git_repo()}' \
+        'Key=build_commit,Value=${git_commit()}' \
       ",
       region: 'us-west-1'
     )
