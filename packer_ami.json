@@ -5,7 +5,7 @@
     "region": "",
     "source_ami": "",
     "instance_type": "m3.medium",
-    "ami_name": "api.photos {{isotime}}"
+    "ami_name": "api.photos {{timestamp}}"
   },
   "builders": [
     {
@@ -19,7 +19,8 @@
       "ssh_username": "ubuntu",
       "tags": {
         "Role": "api",
-        "Environment": "photos-delta"
+        "Environment": "photos-delta",
+        "build_time": "{{isotime}}",
       }
     }
   ],
