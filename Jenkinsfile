@@ -45,7 +45,7 @@ def check_deps(args) {
 
 def ami_id(){
   sh (
-    script: "awk '/AMI: ami-/ { printf "%s-", \$4 }' packer_ami.log",
+    script: "awk '/AMI: ami-/ { printf \"%s-\", \$4 }' packer_ami.log",
     returnStdout: true
   ).trim()
 }
