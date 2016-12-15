@@ -29,8 +29,10 @@ stage('tag') {
         Key=release_name,Value=${codename()} \
         Key=build_server,Value=${env.HOSTNAME} \
         Key=build_node,Value=${env.NODE_NAME} \
-        Key=build_id,Value=${env.BUILD_ID} \
-        Key=build_id,Value=${env.BUILD_ID} \
+        Key=build_number,Value=${env.BUILD_NUMBER} \
+        Key=build_job_name,Value=${env.JOB_NAME} \
+        Key=build_repo,Value=${${git_repo()}} \
+        Key=build_commit,Value=${${git_commit()}} \
       ",
       region: 'us-west-1'
     )
@@ -83,6 +85,20 @@ def codename() {
 def aws_tag(Map args) {
   sh (
     script: "aws ec2 create-tags --region ${args.region} --resources ${args.resources} --tags ${args.tags}",
+    returnStdout: true
+  )
+}
+
+def git_repo(args) {
+  sh (
+    script: "git config remote.origin.url",
+    returnStdout: true
+  )
+}
+
+def git_commit(arga){
+  sh (
+    script: "git rev-parse HEAD",
     returnStdout: true
   )
 }
