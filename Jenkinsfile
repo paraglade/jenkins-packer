@@ -54,7 +54,7 @@ def check_deps(args) {
   sh "which ${args}"
 }
 
-def ami_id(){
+def ami_id() {
   sh (
     script: "awk '/AMI: ami-/ { print \$3 }' packer_ami.log",
     returnStdout: true
@@ -96,7 +96,7 @@ def git_repo() {
   ).trim()
 }
 
-def git_commit(){
+def git_commit() {
   sh (
     script: "git rev-parse HEAD",
     returnStdout: true
