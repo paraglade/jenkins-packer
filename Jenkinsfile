@@ -16,8 +16,10 @@ stage('build') {
 
 stage('tag') {
   node {
-    ami_id = ami_id()
-    echo ami_id
+    sh (
+      script: "echo ami_id id: ${ami_id()}",
+      returnStdout: true
+    )
   }
 }
 
@@ -44,15 +46,24 @@ def ami_id(){
 }
 
 def distro() {
-  sh "awk '/@LSB_DISTRIBUTION/ { print \$4 }' packer_ami.log"
+  sh (
+    script: "awk '/@LSB_DISTRIBUTION/ { print \$4 }' packer_ami.log",
+    returnStdout: true
+  ).trim()
 }
 
 def release() {
-  sh "awk '/@LSB_RELEASE/ { print \$4 }' packer_ami.log"
+  sh (
+    script: "awk '/@LSB_RELEASE/ { print \$4 }' packer_ami.log",
+    returnStdout: true
+  ).trim()
 }
 
 def codename() {
-  sh "awk '/@LSB_CODENAME/ { print \$4 }' packer_ami.log"
+  sh (
+    script: "awk '/@LSB_CODENAME/ { print \$4 }' packer_ami.log",
+    returnStdout: true
+  ).trim()
 }
 
 def aws_tag(args) {
