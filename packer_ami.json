@@ -20,7 +20,8 @@
       "tags": {
         "Role": "api",
         "Environment": "photos-delta",
-        "state": "initialized"
+        "state": "initialized",
+        "build_time": "{{timestamp}}"
       }
     }
   ],
