@@ -10,7 +10,7 @@ stage('validate') {
 }
 stage('build') {
   node {
-  //  packer 'build -color=false -var-file=us-west-1.json packer_ami.json | tee packer_ami.log'
+    packer 'build -color=false -var-file=us-west-1.json packer_ami.json | tee packer_ami.log'
   }
 }
 
@@ -23,7 +23,8 @@ stage('tag') {
     aws_tag (
       resources: ami_id(),
       tags: "\
-        'Key=state,Value=initializedi' \
+        'Key=name',Value=api.photos-${release()}.${env.BUILD_NUMBER}' \
+        'Key=state,Value=initialized' \
         'Key=distro,Value=${distro()}' \
         'Key=release,Value=${release()}' \
         'Key=release_name,Value=${codename()}' \
