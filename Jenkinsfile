@@ -22,7 +22,8 @@ stage('tag') {
     )
     aws_tag (
       resources: ami_id(),
-      tags: "Key=distro,Value=${distro()}"
+      tags: "Key=distro,Value=${distro()}",
+      region: 'us-west-1'
     )
   }
 }
@@ -72,7 +73,7 @@ def codename() {
 
 def aws_tag(Map args) {
   sh (
-    script: "aws ec2 create-tags --resources ${args.resources} --tags ${args.tags}",
+    script: "aws ec2 create-tags --region ${args.region} --resources ${args.resources} --tags ${args.tags}",
     returnStdout: true
   )
 }
