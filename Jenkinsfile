@@ -38,6 +38,7 @@ stage('tag') {
     echo release()
     echo codename()
     echo git_repo()
+    echo git_commit()
   }
 }
 
