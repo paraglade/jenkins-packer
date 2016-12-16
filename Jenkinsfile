@@ -34,6 +34,7 @@ stage('tag') {
       ",
       region: 'us-west-1'
     ) */
+    echo ami_id()
     echo distro()
     echo release()
     echo codename()
