@@ -13,7 +13,7 @@ describe package('php7.0-fpm'), :if => os[:family] == 'ubuntu' do
   it { should be_installed }
 end
 
-describe service('php-fpm7.0-fpm'), :if => os[:family] == 'ubuntu' do
+describe service('php7.0-fpm'), :if => os[:family] == 'ubuntu' do
   it { should be_enabled }
   it { should be_running }
 end

@@ -19,7 +19,7 @@ variable "aws_region" {
 
 variable "aws_amis" {
   default = {
-    us-west-1 = "ami-65b8ee05"
+    us-west-1 = "ami-77df8917"
   }
 }
 

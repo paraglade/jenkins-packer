@@ -57,7 +57,6 @@ resource "aws_instance" "jenkins-build-test" {
     }
   provisioner "remote-exec" {
     inline = [
-      "sleep 30",
       "sudo apt-get -y update",
       "sudo apt-get -y install ruby-serverspec",
       "cd /tmp/tests && rake"
