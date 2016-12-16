@@ -20,7 +20,7 @@ stage('tag') {
     aws_tag (
       resources: ami_id(),
       tags: "\
-        'Key=name,Value=api.photos-${release()}.${env.BUILD_NUMBER}' \
+        'Key=Name,Value=api.photos-${release()}.${env.BUILD_NUMBER}' \
         'Key=state,Value=initialized' \
         'Key=distro,Value=${distro()}' \
         'Key=release,Value=${release()}' \
