@@ -34,6 +34,14 @@ stage('tag') {
       ",
       region: 'us-west-1'
     ) */
+    aws_tag (
+      resources: ami_id(),
+      tags: "\
+        'Key=name',Value=api.photos-${release()}.${env.BUILD_NUMBER}' \
+      ",
+      region: 'us-west-1'
+    )
+
     echo ami_id()
     echo distro()
     echo release()
