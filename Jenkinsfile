@@ -11,7 +11,7 @@ stage('validate') {
 }
 stage('build') {
   node {
-  //  packer 'build -color=false -var-file=us-west-1.json packer_ami.json | tee packer_ami.log'
+    packer 'build -color=false -var-file=us-west-1.json packer_ami.json | tee packer_ami.log'
   }
 }
 
