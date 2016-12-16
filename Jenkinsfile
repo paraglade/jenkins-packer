@@ -17,10 +17,10 @@ stage('build') {
 
 stage('tag') {
   node {
-/*    aws_tag (
+    aws_tag (
       resources: ami_id(),
       tags: "\
-        'Key=name',Value=api.photos-${release()}.${env.BUILD_NUMBER}' \
+        'Key=name,Value=api.photos-${release()}.${env.BUILD_NUMBER}' \
         'Key=state,Value=initialized' \
         'Key=distro,Value=${distro()}' \
         'Key=release,Value=${release()}' \
@@ -33,21 +33,7 @@ stage('tag') {
         'Key=build_commit,Value=${git_commit()}' \
       ",
       region: 'us-west-1'
-    ) */
-    aws_tag (
-      resources: ami_id(),
-      tags: "\
-        'Key=name,Value=api.photos-${release()}.${env.BUILD_NUMBER}' \
-      ",
-      region: 'us-west-1'
     )
-
-    echo ami_id()
-    echo distro()
-    echo release()
-    echo codename()
-    echo git_repo()
-    echo git_commit()
   }
 }
 
