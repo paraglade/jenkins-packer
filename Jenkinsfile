@@ -37,6 +37,7 @@ stage('tag') {
     echo distro()
     echo release()
     echo codename()
+    echo git_repo()
   }
 }
 
