@@ -17,7 +17,7 @@ stage('build') {
 
 stage('tag') {
   node {
-    aws_tag (
+/*    aws_tag (
       resources: ami_id(),
       tags: "\
         'Key=name',Value=api.photos-${release()}.${env.BUILD_NUMBER}' \
@@ -34,7 +34,7 @@ stage('tag') {
       ",
       region: 'us-west-1'
     )
-  }
+  } */
 }
 
 stage('test') {
