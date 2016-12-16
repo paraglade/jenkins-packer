@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
+echo "* Disable automatic apt-updates"
+systemctl disable apt-daily.service
+systemctl disable apt-daily.timer
+
 echo "* Cleanup apt cache"
 apt-get -y autoremove --purge
 apt-get -y autoclean
