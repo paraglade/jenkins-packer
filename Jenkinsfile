@@ -34,12 +34,12 @@ stage('tag') {
       ",
       region: 'us-west-1'
     ) */
+    echo distro()
   }
 }
 
 stage('test') {
   node {
-    figlet(message: 'testing')
   }
 }
 
