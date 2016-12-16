@@ -33,8 +33,8 @@ stage('tag') {
         'Key=build_commit,Value=${git_commit()}' \
       ",
       region: 'us-west-1'
-    )
-  } */
+    ) */
+  }
 }
 
 stage('test') {
