@@ -35,6 +35,7 @@ stage('tag') {
       region: 'us-west-1'
     ) */
     echo distro()
+    echo release()
   }
 }
 
