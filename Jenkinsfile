@@ -47,7 +47,7 @@ stage('test') {
       region: 'us-west-1'
     )
     sh "yes | ssh-keygen -q -t rsa -f jenkins_testing -N ''"
-    terraform "apply -var key_name=jenkins-testing -var public_key_path=jenkins_tesing.pub -var aws_ami=${ami_id()}"
+    terraform "apply -var key_name=jenkins-testing -var public_key_path=jenkins_testing.pub -var aws_ami=${ami_id()}"
   }
 }
 

@@ -10,7 +10,7 @@ DESCRIPTION
 }
 
 variable "credentials_file" {
-  default = "~/./aws/credentials"
+  default = "~/.aws/credentials"
 }
 
 variable "profile" {
