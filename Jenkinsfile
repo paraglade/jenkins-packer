@@ -12,7 +12,7 @@ stage('validate') {
 }
 stage('build') {
   node {
-    packer 'build -color=false -var-file=us-west-1.json packer_ami.json | tee packer_ami.log'
+  //  packer 'build -color=false -var-file=us-west-1.json packer_ami.json | tee packer_ami.log'
   }
 }
 
@@ -40,8 +40,14 @@ stage('tag') {
 
 stage('test') {
   node {
+    aws_tag (
+      resources: ami_id(),
+      tags: "\
+        'Key=state,Value=testing' \
+      region: 'us-west-1'
+    )
     sh "ssh-keygen -q -t rsa -f jenkins_testing -N ''"
-    terraform apply "-var 'key_name=jenkins-testing' -var 'public_key_path=jenkins_tesing.pub' -var 'aws_ami=${ami_id()}'"
+    terraform "apply -var key_name=jenkins-testing -var public_key_path=jenkins_tesing.pub -var aws_ami=${ami_id()}"
   }
 }
 
