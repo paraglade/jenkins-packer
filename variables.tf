@@ -6,6 +6,15 @@ connect.
 
 Example: ~/.ssh/terraform.pub
 DESCRIPTION
+  default = "jenkins_tesing.pub"
+}
+
+variable "credentials_file" {
+  default = "~/./aws/credentials"
+}
+
+variable "profile" {
+  default = "default"
 }
 
 variable "key_name" {
@@ -17,10 +26,8 @@ variable "aws_region" {
   default     = "us-west-1"
 }
 
-variable "aws_amis" {
-  default = {
-    us-west-1 = "ami-77df8917"
-  }
+variable "aws_ami" {
+  default = ""
 }
 
 variable "aws_tags" {

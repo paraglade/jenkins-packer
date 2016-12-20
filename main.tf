@@ -1,14 +1,13 @@
 # Specify the provider and access details
 provider "aws" {
   region = "${var.aws_region}"
-  shared_credentials_file  = "/home/nroberts/.aws/credentials"
-  profile                  = "thislife-dev"
-
+  shared_credentials_file  = "${var.credentials_file}"
+  profile                  = "${var.profile}"
 }
 
-resource "aws_security_group" "jenkins-tester" {
-  name        = "jenkins-tester"
-  description = "jenkins-tester"
+resource "aws_security_group" "jenkins-testing" {
+  name        = "jenkins-testing"
+  description = "jenkins-testing"
   tags = "${var.aws_tags}"
 
   # SSH access from anywhere
@@ -40,21 +39,19 @@ resource "aws_instance" "jenkins-build-test" {
 
   instance_type = "t2.micro"
 
-  ami = "${lookup(var.aws_amis, var.aws_region)}"
+  ami = "${var.aws_ami}"
 
   key_name = "${aws_key_pair.auth.id}"
 
-  vpc_security_group_ids = ["${aws_security_group.jenkins-tester.id}"]
+  vpc_security_group_ids = ["${aws_security_group.jenkins-testing.id}"]
 
   tags = "${var.aws_tags}"
 
-  # We run a remote provisioner on the instance after creating it.
-  # In this case, we just install nginx and start it. By default,
-  # this should be on port 80
   provisioner "file" {
         source = "tests"
         destination = "/tmp"
-    }
+  }
+
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get -y update",

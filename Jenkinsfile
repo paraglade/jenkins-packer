@@ -6,6 +6,7 @@ stage('validate') {
     checkout scm
     packer 'version'
     packer 'validate -var-file=us-west-1.json packer_ami.json'
+    terraform 'validate'
 
   }
 }
@@ -39,11 +40,17 @@ stage('tag') {
 
 stage('test') {
   node {
+    sh "ssh-keygen -q -t rsa -f jenkins_testing -N ''"
+    terraform apply "-var 'key_name=jenkins-testing' -var 'public_key_path=jenkins_tesing.pub' -var 'aws_ami=${ami_id()}'"
   }
 }
 
 def packer(args) {
-    sh "${tool name: 'packer', type: 'biz.neustar.jenkins.plugins.packer.PackerInstallation'}/packer ${args}"
+  sh "${tool name: 'packer', type: 'biz.neustar.jenkins.plugins.packer.PackerInstallation'}/packer ${args}"
+}
+
+def terraform(args) {
+  sh "${tool name: 'default terrform', type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'}/terraform ${args}"
 }
 
 def check_deps(args) {
