@@ -43,7 +43,7 @@ stage('test') {
     aws_tag (
       resources: ami_id(),
       tags: "\
-        'Key=state,Value=testing' \
+        'Key=state,Value=testing'",
       region: 'us-west-1'
     )
     sh "ssh-keygen -q -t rsa -f jenkins_testing -N ''"
